@@ -1,0 +1,22 @@
+﻿@page "/tweets"
+@using MediatR
+@inject IMediator Mediator
+
+<h3>Tweets</h3>
+
+@foreach (var tweet in _tweets)
+{
+    <Tweet Text="@tweet"/>
+}
+
+@code {
+
+    private List<string> _tweets;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var model = await Mediator.Send(new Features.Tweets.List.Query());
+        _tweets = model.Tweets;
+    }
+
+}
