@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using MyTweets.Data;
 
 namespace MyTweets.Features.Tweets
 {
@@ -18,17 +20,18 @@ namespace MyTweets.Features.Tweets
 
         public class QueryHandler : IRequestHandler<Query, Model>
         {
+            private readonly TweetStore _tweetStore;
+
+            public QueryHandler(TweetStore tweetStore)
+            {
+                _tweetStore = tweetStore;
+            }
+            
             public async Task<Model> Handle(Query request, CancellationToken cancellationToken)
             {
                 return new Model
                 {
-                    Tweets = new List<string>
-                    {
-                        "One from the server",
-                        "Two from the server",
-                        "Three from the server",
-                        "Four"
-                    }
+                    Tweets = _tweetStore.Tweets.Select(x=>x.Contents).ToList()
                 };
             }
         }

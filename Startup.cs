@@ -32,6 +32,7 @@ namespace MyTweets
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddSingleton<TweetStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
