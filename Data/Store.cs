@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MyTweets.Data
 {
-    public class TweetStore
+    public class Store
     {
         public IList<Tweet> Tweets { get; set; } = new List<Tweet>
         {

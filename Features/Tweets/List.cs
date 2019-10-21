@@ -20,9 +20,9 @@ namespace MyTweets.Features.Tweets
 
         public class QueryHandler : IRequestHandler<Query, Model>
         {
-            private readonly TweetStore _tweetStore;
+            private readonly Store _tweetStore;
 
-            public QueryHandler(TweetStore tweetStore)
+            public QueryHandler(Store tweetStore)
             {
                 _tweetStore = tweetStore;
             }

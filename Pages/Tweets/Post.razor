@@ -1,0 +1,23 @@
+﻿@using MediatR
+@inject IMediator Mediator
+
+<EditForm OnValidSubmit="@HandleSubmit" Model="@command" class="mb-3">
+    <div class="form-group">
+        <InputTextArea placeholder="What do you want to say?"
+                       @bind-Value="@command.Contents"
+                       class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">
+        Tweet it!
+    </button>
+</EditForm>
+
+
+@code {
+    private Features.Tweets.Post.Command command = new Features.Tweets.Post.Command();
+
+    private async Task HandleSubmit()
+    {
+        await Mediator.Send(command);
+    }
+}
