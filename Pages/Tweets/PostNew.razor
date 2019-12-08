@@ -1,5 +1,6 @@
 ﻿@using MediatR
 @inject IMediator Mediator
+@using MyTweets.Features.Tweets
 
 <EditForm OnValidSubmit="@HandleSubmit" Model="@command" class="mb-3">
     <div class="form-group">
@@ -14,10 +15,14 @@
 
 
 @code {
-    private Features.Tweets.Post.Command command = new Features.Tweets.Post.Command();
+    private Post.Command command = new Post.Command();
+
+    [Parameter]
+    public EventCallback OnPosted { get; set; }
 
     private async Task HandleSubmit()
     {
         await Mediator.Send(command);
+        await OnPosted.InvokeAsync(null);
     }
 }
